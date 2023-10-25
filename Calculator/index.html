@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Calculator -Coding Samurai</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="container">
+    <div class="calculator">
+        <form>
+            <div class="display">
+                <input disabled type="text" name="display" value="0">
+                <input class="deleteButton"
+                       onclick=display.value=display.value.toString().slice(0,-1)>
+            </div>
+            <div class="grayOperators">
+
+                <input type="button" value="AC"
+                       onclick="display.value= '0' ">
+
+                <button type="button" class="plus_Minus"
+                        onclick="
+                if(display.value.includes('-') ||
+                 display.value.includes('+') ||
+                  display.value.includes('x') ||
+                  display.value.includes('%') ||
+                   display.value.includes('÷'))
+                       display.value= evaluateThis(display.value) * -1;
+                else if(display.value !== '')
+                    display.value*=-1;
+                  "><sup>+</sup><span>/</span><sup>_</sup></button>
+                <input type="button" value="%"
+                       onclick=" checkOnNothing('%'); ">
+
+                <input type="button" class="orangeOperators" value="÷"
+                       onclick=" checkOnNothing('÷') ">
+            </div>
+            <div>
+                <input type="button" value="7"
+                       onclick=" checkOnZero('7') ">
+                <input type="button" value="8"
+                       onclick=" checkOnZero('8')">
+                <input type="button" value="9"
+                       onclick=" checkOnZero('9') ">
+                <input class="orangeOperators" type="button" value="x"
+                       onclick=" checkOnNothing('x') ">
+            </div>
+            <div>
+                <input type="button" value="4"
+                       onclick=" checkOnZero('4') ">
+
+                <input type="button" value="5"
+                       onclick=" checkOnZero('5') ">
+                <input type="button" value="6"
+                       onclick=" checkOnZero('6') ">
+
+                <button type="button" class="orangeOperators plus_Minus"
+                        onclick=" checkOnNothing('-') "><sup>_</sup></button>
+            </div>
+            <div>
+                <input type="button" value="1"
+                       onclick=" checkOnZero('1') ">
+
+                <input type="button" value="2"
+                       onclick=" checkOnZero('2') ">
+
+                <input type="button" value="3"
+                       onclick=" checkOnZero('3') ">
+                <input class="orangeOperators" type="button" value="+"
+                       onclick=" checkOnNothing('+') ">
+            </div>
+            <div class="bigZero">
+                <input class="bigZero_input" type="button" value="0"
+                       onclick="
+                       checkOnZero('0') ">
+                <input type="button" value="."
+                       onclick=" checkOnNothing('.') ">
+
+                <input class="orangeOperators" type="button" value="="
+                       onclick=" display.value= evaluateThis(display.value) ">
+            </div>
+        </form>
+        <hr>
+    </div>
+</div>
+</body>
+</html>
+<script>
+    let display = document.querySelector('input[name="display"]')
+
+    function checkOnNothing(operand) {
+        if (display.value !== '')
+            display.value += operand
+    }
+
+    function checkOnZero(number) {
+        if (display.value === '0')
+            display.value = number
+        else
+            display.value += number
+    }
+
+    function evaluateThis(expression) {
+        console.log(expression)
+        if (expression.includes('x'))
+            expression = expression.replace('x', '*')
+        if (expression.includes('÷'))
+            expression = expression.replace('÷', '/')
+        return eval(expression)
+    }
+
+</script>
